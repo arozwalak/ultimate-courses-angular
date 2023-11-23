@@ -50,3 +50,23 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+# Notes
+
+Generate ngModule
+```
+npx ng g module admin --module=app.module
+```
+
+Generate component (dry run)
+
+```
+npx ng g component admin/containers/donut-list --dry-run
+```
+
+Generate model interface
+
+```
+npx ng g interface admin/models/Donut model
+```
