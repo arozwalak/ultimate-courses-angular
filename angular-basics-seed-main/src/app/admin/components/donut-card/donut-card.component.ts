@@ -7,13 +7,13 @@ import { Donut } from '../../models/donut.model';
       <div
       class="donut-card"
       [ngClass]="{
-        'donut-card-promo': donut.promo
+        'donut-card-promo': donut.promo === 'new'
       }"
-      [class.donut-card-promo]="donut.promo"
+      [class.donut-card-promo]="donut.promo === 'new'"
       [style.border]="donut.promo ? '2px solid #aaa' : 'none'"
       [ngStyle]="{
-        border: donut.promo ? '2px solid #aaa' : 'none',
-        'background-color': donut.promo ? '#eee' : '#ddd',
+        border: donut.promo === 'limited' ? '2px solid #aaa' : 'none',
+        'background-color': donut.promo === 'new' ? '#eee' : '#ddd',
         'font-size.px': 11
       }"
       >
@@ -23,6 +23,21 @@ import { Donut } from '../../models/donut.model';
         <div>
           <p class="donut-card-name">
             {{ donut.name }}
+            <ng-container [ngSwitch]="donut.promo">
+              <span class="donut-card-label">
+              <ng-template [ngSwitchCase]="'new'"> NEW </ng-template>
+              <ng-template [ngSwitchCase]="'limited'"> LIMITED </ng-template>
+              <ng-template ngSwitchDefault> Nothing special... </ng-template>
+              </span>
+            <!--
+              <span *ngSwitchCase="'new'" class="donut-card-label">NEW</span>
+              <span *ngSwitchCase="'limited'" class="donut-card-label">LIMITED</span>
+              <span *ngSwitchDefault class="donut-card-label">Nothing special...</span>
+               -->
+            </ng-container>
+
+            <ng-template ></ng-template>
+
           </p>
           <p class="donut-card-price">
             {{ donut.price / 100 | currency: 'GBP': 'symbol' }}
@@ -61,6 +76,14 @@ import { Donut } from '../../models/donut.model';
 
         &-name {
           font-size: 16px;
+        }
+        &-label {
+          border: 1px solid #c14583;
+          border-radius: 4px;
+          padding: 0 4px;
+          margin-left: 5px;
+          font-size: 12px;
+          color: #c14583;
         }
         &-price {
           font-size: 14px;
