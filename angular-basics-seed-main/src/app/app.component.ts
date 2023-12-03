@@ -3,15 +3,14 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-  <div class="app">
-    <header class="header">
-      <img class="logo" src="/assets/img/logo.svg" alt="Ultimate Donuts">
-    </header>
-    <!-- <app-donut-list></app-donut-list> -->
-    <app-donut-single></app-donut-single>
+    <div class="app">
+      <header class="header">
+        <img class="logo" src="/assets/img/logo.svg" alt="Ultimate Donuts" />
+      </header>
+      <!-- <app-donut-list></app-donut-list> -->
+      <app-donut-single></app-donut-single>
 
-
-    <!--
+      <!--
     <h1>{{ message.length ? message : 'Nothing here...'}}</h1>
     <h1 [innerText]="message.length ? message : 'Nothing here...'"></h1>
 
@@ -23,7 +22,7 @@ import { Component, OnInit } from '@angular/core';
     <h1 (click)="handleClick($event)">{{ newMessage }}</h1>
     <input [value]="message" (input)="newMessage = messageInput2.value" #messageInput2>
     -->
-  </div>
+    </div>
   `,
   styles: [
     `
@@ -51,7 +50,6 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   message!: string;
   newMessage!: string;
-
 
   ngOnInit() {
     this.message = 'Hello World';

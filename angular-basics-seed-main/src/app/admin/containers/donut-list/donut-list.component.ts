@@ -6,22 +6,27 @@ import { DonutService } from '../../services/donut.service';
   selector: 'app-donut-list',
   template: `
     <div>
-      <ng-container *ngIf="donuts.length; then cards; else nothing"></ng-container>
+      <ng-container
+        *ngIf="donuts?.length; then cards; else nothing"
+      ></ng-container>
     </div>
-<!--
+    <!--
     <div>
       <ng-template [ngIf]="donuts.length" [ngIfThen]="cards" [ngIfElse]="nothing"></ng-template>
     </div>
  -->
     <ng-template #cards>
-      <app-donut-card *ngFor="let donut of donuts; trackBy: trackById" [donut]="donut"></app-donut-card>
-<!--
+      <app-donut-card
+        *ngFor="let donut of donuts; trackBy: trackById"
+        [donut]="donut"
+      ></app-donut-card>
+      <!--
       <ng-template ngFor [ngForOf]="donuts" let-donut let-i="index">
         <app-donut-card [donut]=donut></app-donut-card>
         {{ i }}
       </ng-template>
  -->
-<!--
+      <!--
       <div [style.color]="o ? 'red' : 'blue'"
       *ngFor="let donut of donuts; trackBy: trackById; index as i; odd as o; even as e">
         {{ i + 1 }}
@@ -35,16 +40,17 @@ import { DonutService } from '../../services/donut.service';
       <p>No Donuts here...</p>
     </ng-template>
   `,
-  styles: [
-  ]
+  styles: [],
 })
 export class DonutListComponent implements OnInit {
   donuts!: Donut[];
 
   constructor(private donutService: DonutService) {}
-  
+
   ngOnInit() {
-    this.donuts = this.donutService.read();
+    this.donutService
+      .read()
+      .subscribe((donuts: Donut[]) => (this.donuts = donuts));
   }
 
   trackById(index: number, value: Donut) {
