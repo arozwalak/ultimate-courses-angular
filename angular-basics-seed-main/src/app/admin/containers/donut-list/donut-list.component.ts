@@ -6,6 +6,13 @@ import { DonutService } from '../../services/donut.service';
   selector: 'app-donut-list',
   template: `
     <div>
+      <div class="donut-list-actions">
+        <a routerLink="new" class="btn btn--green">
+          New Donut
+          <img src="/assets/img/icon/plus.svg" />
+        </a>
+      </div>
+
       <ng-container
         *ngIf="donuts?.length; then cards; else nothing"
       ></ng-container>
@@ -40,7 +47,15 @@ import { DonutService } from '../../services/donut.service';
       <p>No Donuts here...</p>
     </ng-template>
   `,
-  styles: [],
+  styles: [
+    `
+      .donut-list {
+        &-actions {
+          margin-bottom: 10px;
+        }
+      }
+    `,
+  ],
 })
 export class DonutListComponent implements OnInit {
   donuts!: Donut[];

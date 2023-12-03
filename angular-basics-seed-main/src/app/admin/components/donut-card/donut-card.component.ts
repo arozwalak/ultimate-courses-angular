@@ -4,8 +4,9 @@ import { Donut } from '../../models/donut.model';
 @Component({
   selector: 'app-donut-card',
   template: `
-      <div
+    <a
       class="donut-card"
+      [routerLink]="donut.id"
       [ngClass]="{
         'donut-card-promo': donut.promo === 'new'
       }"
@@ -16,49 +17,50 @@ import { Donut } from '../../models/donut.model';
         'background-color': donut.promo === 'new' ? '#eee' : '#ddd',
         'font-size.px': 11
       }"
-      >
-        <img src="/assets/img/{{donut.icon}}.svg"
+    >
+      <img
+        src="/assets/img/{{ donut.icon }}.svg"
         [alt]="donut.name"
-        class="donut-card-icon">
-        <div>
-          <p class="donut-card-name">
-            {{ donut.name }}
-            <ng-container [ngSwitch]="donut.promo">
-              <span class="donut-card-label">
+        class="donut-card-icon"
+      />
+      <div>
+        <p class="donut-card-name">
+          {{ donut.name }}
+          <ng-container [ngSwitch]="donut.promo">
+            <span class="donut-card-label">
               <ng-template [ngSwitchCase]="'new'"> NEW </ng-template>
               <ng-template [ngSwitchCase]="'limited'"> LIMITED </ng-template>
               <ng-template ngSwitchDefault> Nothing special... </ng-template>
-              </span>
+            </span>
             <!--
               <span *ngSwitchCase="'new'" class="donut-card-label">NEW</span>
               <span *ngSwitchCase="'limited'" class="donut-card-label">LIMITED</span>
               <span *ngSwitchDefault class="donut-card-label">Nothing special...</span>
                -->
-            </ng-container>
+          </ng-container>
 
-            <ng-template ></ng-template>
-
-          </p>
-          <p class="donut-card-price">
-            {{ donut.price / 100 | currency: 'GBP': 'symbol' }}
-          </p>
-        </div>
+          <ng-template></ng-template>
+        </p>
+        <p class="donut-card-price">
+          {{ donut.price / 100 | currency : 'GBP' : 'symbol' }}
+        </p>
       </div>
+    </a>
   `,
   styles: [
     `
       //:host{
-        // display: flex;
-        // align-items: center;
-        // background: #f7f7f7;
-        // border-radius: 5px;
-        // margin-bottom: 5px;
-        // padding: 5px 15px;
-        // transition: transform 0.2s ease-in-out;
+      // display: flex;
+      // align-items: center;
+      // background: #f7f7f7;
+      // border-radius: 5px;
+      // margin-bottom: 5px;
+      // padding: 5px 15px;
+      // transition: transform 0.2s ease-in-out;
 
-        // &:hover {
-        //   transform: translateY(-3px);
-        // }
+      // &:hover {
+      //   transform: translateY(-3px);
+      // }
       // }
 
       .donut-card {
@@ -97,8 +99,8 @@ import { Donut } from '../../models/donut.model';
           border: 2px solid #eee;
         }
       }
-    `
-  ]
+    `,
+  ],
 })
 export class DonutCardComponent {
   @Input() donut!: Donut;

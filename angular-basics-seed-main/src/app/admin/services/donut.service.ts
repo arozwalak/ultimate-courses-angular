@@ -10,7 +10,6 @@ import {
   delay,
   map,
   of,
-  retry,
   retryWhen,
   take,
   tap,
@@ -49,7 +48,7 @@ export class DonutService {
     );
   }
 
-  readOne(id: string) {
+  readOne(id: string | null) {
     return this.read().pipe(
       map((donuts) => {
         const donut = donuts.find((donut: Donut) => donut.id === id);

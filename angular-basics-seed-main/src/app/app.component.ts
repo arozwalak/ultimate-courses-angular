@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
         <img class="logo" src="/assets/img/logo.svg" alt="Ultimate Donuts" />
       </header>
       <!-- <app-donut-list></app-donut-list> -->
-      <app-donut-single></app-donut-single>
+      <!-- <app-donut-single></app-donut-single> -->
+      <router-outlet></router-outlet>
 
       <!--
     <h1>{{ message.length ? message : 'Nothing here...'}}</h1>
