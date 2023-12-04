@@ -10,6 +10,7 @@ import {
   QueryList,
   AfterContentInit,
   ChangeDetectorRef,
+  Renderer,
 } from "@angular/core";
 
 import { AuthRememberComponent } from "./auth-remember.component";
@@ -58,18 +59,24 @@ export class AuthFormComponent implements AfterContentInit, AfterViewInit {
 
   @ViewChild("email") email: ElementRef;
 
-  constructor(private cd: ChangeDetectorRef) {}
+  constructor(private renderer: Renderer, private cd: ChangeDetectorRef) {}
 
   showMessage: boolean;
 
   ngAfterViewInit(): void {
-    this.email.nativeElement.setAttribute(
+    this.renderer.setElementAttribute(
+      this.email.nativeElement,
       "placeholder",
       "Enter your email address"
     );
-
-    this.email.nativeElement.classList.add("email");
-    this.email.nativeElement.focus();
+    this.renderer.setElementClass(this.email.nativeElement, "email", true);
+    this.renderer.invokeElementMethod(this.email.nativeElement, "focus");
+    // this.email.nativeElement.setAttribute(
+    //   "placeholder",
+    //   "Enter your email address"
+    // );
+    // this.email.nativeElement.classList.add("email");
+    // this.email.nativeElement.focus();
 
     if (this.message) {
       this.message.forEach((message) => {
