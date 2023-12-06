@@ -31,6 +31,6 @@ export class AppComponent implements AfterContentInit {
   }
 
   loginUser(user: User) {
-    console.log("Login", user, this.rememberMe);
+    console.log("Login", user);
   }
 }
