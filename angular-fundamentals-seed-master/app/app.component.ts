@@ -22,6 +22,8 @@ import { AuthFormComponent } from "./auth-form/auth-form.component";
     `,
   ],
   template: `
+    <app-tmpl></app-tmpl>
+
     <div>
       <button (click)="destroyComponent()">Destroy</button>
       <button (click)="moveComponent()">Move</button>
