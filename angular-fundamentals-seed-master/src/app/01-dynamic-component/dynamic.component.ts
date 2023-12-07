@@ -6,8 +6,8 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {AuthFormComponent} from "../auth-form/auth-form.component";
-import {User} from "../auth-form/auth-form.interface";
+import {AuthFormComponent} from "../00-auth-form/auth-form.component";
+import {User} from "../00-auth-form/auth-form.interface";
 
 @Component({
   selector: 'app-dynamic-component',
