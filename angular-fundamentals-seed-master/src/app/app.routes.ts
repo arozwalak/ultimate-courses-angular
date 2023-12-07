@@ -15,5 +15,9 @@ export const routes: Routes = [
   {
     path: 'template',
     component: TemplateComponent
+  },
+  {
+    path: 'view-encapsulation',
+    loadComponent: () => import('./view-encapsulation/view-encapsulation.component').then((x) => x.ViewEncapsulationComponent)
   }
 ];
