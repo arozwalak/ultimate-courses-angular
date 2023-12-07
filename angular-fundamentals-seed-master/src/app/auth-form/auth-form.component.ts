@@ -33,7 +33,10 @@ export class AuthFormComponent {
 
   @Output() submitted: EventEmitter<User> = new EventEmitter<User>();
 
+  constructor() {
+  }
   onSubmit(value: User) {
+    console.log(value);
     this.submitted.emit(value);
   }
 }
