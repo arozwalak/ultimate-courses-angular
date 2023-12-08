@@ -27,5 +27,9 @@ export const routes: Routes = [
   {
     path: 'custom-directive',
     loadComponent: () => import('./05-custom-directive/credit-card/credit-card.component').then((x) => x.CreditCardComponent)
+  },
+  {
+    path: 'custom-pipes',
+    loadComponent: () => import('./06-custom-pipes/my-custom-pipes/my-custom-pipes.component').then((x) => x.MyCustomPipesComponent)
   }
 ];
