@@ -38,7 +38,6 @@ input[type=text],
 input[type=email],
 input[type=number],
 input[type=password] {
-  border: none;
   background: #fff;
   font-size: 13px;
   padding: 6px 30px 6px 10px;
@@ -99,7 +98,6 @@ auth-form:first-child form {
 }
 input {
   display: block;
-  border: none;
   background: #ffffff;
   font-size: 13px;
   padding: 6px 30px 6px 10px;
@@ -111,4 +109,25 @@ label {
 }
 h3 {
   margin-bottom: 20px;
+}
+
+
+
+.tooltip-container {
+  position: relative;
+}
+.tooltip {
+  position: absolute;
+  display: none;
+  left: calc(100% + 10px);
+  top: 0;
+  width: 200px;
+  background: black;
+  padding: 6px;
+  border-radius: 8px;
+  color: white;
+
+  &--active {
+    display: block;
+  }
 }

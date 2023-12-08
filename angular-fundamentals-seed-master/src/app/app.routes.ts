@@ -23,5 +23,9 @@ export const routes: Routes = [
   {
     path: 'change-detection-strategy',
     loadComponent: () => import('./04-change-detection-strategy/change-detection-strategy.component').then((x) => x.ChangeDetectionStrategyComponent)
+  },
+  {
+    path: 'custom-directive',
+    loadComponent: () => import('./05-custom-directive/credit-card/credit-card.component').then((x) => x.CreditCardComponent)
   }
 ];
