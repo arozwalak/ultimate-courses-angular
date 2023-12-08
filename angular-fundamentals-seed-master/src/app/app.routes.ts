@@ -31,5 +31,10 @@ export const routes: Routes = [
   {
     path: 'custom-pipes',
     loadComponent: () => import('./06-custom-pipes/my-custom-pipes/my-custom-pipes.component').then((x) => x.MyCustomPipesComponent)
+  },
+  {
+    path: 'reactive-forms',
+    loadChildren: () => import('./07-reactive-form/stock-inventory/stock-inventory.module').then((x) => x.StockInventoryModule)
   }
 ];
+
