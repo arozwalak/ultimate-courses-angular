@@ -11,19 +11,20 @@ import {Product} from "../../models/product.interface";
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
 
         <stock-branch
-          [parent]="form"
+          [store]="store"
         >
         </stock-branch>
 
         <stock-selector
-          [parent]="form"
+          [selector]="selector"
           [products]="products"
+          (added)="addStock($event)"
         >
         </stock-selector>
 
-
         <stock-products
           [parent]="form"
+          (removed)="removeStock($event)"
         >
         </stock-products>
 
@@ -50,18 +51,36 @@ export class StockInventoryComponent {
     { "id": 5, "price": 600, "name": "Apple Watch" },
   ];
 
-  form = new FormGroup({
+  form= new FormGroup({
     store: new FormGroup({
       branch: new FormControl(''),
       code: new FormControl('')
     }),
-    selector: new FormGroup({
-      product_id: new FormControl(''),
-      quantity: new FormControl(10)
-    }),
-    stock: new FormArray([])
+    selector: this.createStock({}),
+    stock: new FormArray([
+      this.createStock({ product_id: 1, quantity: 10 }),
+      this.createStock({ product_id: 3, quantity: 50 })
+    ])
   })
 
+  get selector() { return this.form.get('selector') as FormGroup; }
+  get store() { return this.form.get('store') as FormGroup; }
+  get stock() { return this.form.get('stock') as FormArray; }
+
+  createStock(stock: any) {
+    return new FormGroup({
+      product_id: new FormControl(parseInt(stock.product_id, 10) || ''),
+      quantity: new FormControl(stock.quantity || 10)
+    })
+  }
+
+  addStock(stock: any) {
+    this.stock.push(this.createStock(stock));
+  }
+
+  removeStock({ group, index }: { group: FormGroup, index: number }) {
+    this.stock.removeAt(index);
+  }
   onSubmit() {
     console.log('Submit', this.form.value);
   };
