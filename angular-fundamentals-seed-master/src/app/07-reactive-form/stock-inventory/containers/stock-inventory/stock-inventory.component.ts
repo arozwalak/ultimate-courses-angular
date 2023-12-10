@@ -15,7 +15,7 @@ import { StockInventoryService } from '../../services/stock-inventory.service';
         <stock-branch [store]="store"> </stock-branch>
 
         <stock-selector
-          [selector]="selector"
+          [parent]="form"
           [products]="products"
           (added)="addStock($event)"
         >
@@ -49,14 +49,17 @@ export class StockInventoryComponent implements OnInit {
   productMap!: Map<number, Product>;
   total!: number;
 
-  form = this.fb.group({
-    store: this.fb.group({
-      branch: ['', [Validators.required, StockValidators.checkBranch]],
-      code: ['', Validators.required],
-    }),
-    selector: this.createStock({}),
-    stock: this.fb.array([]),
-  });
+  form = this.fb.group(
+    {
+      store: this.fb.group({
+        branch: ['', [Validators.required, StockValidators.checkBranch]],
+        code: ['', Validators.required],
+      }),
+      selector: this.createStock({}),
+      stock: this.fb.array([]),
+    },
+    { validator: StockValidators.checkStockExists }
+  );
 
   constructor(
     private fb: FormBuilder,
