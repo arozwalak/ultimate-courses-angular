@@ -8,6 +8,8 @@ import { StockInventoryComponent } from './containers/stock-inventory/stock-inve
 import {StockBranchComponent} from "./components/stock-branch/stock-branch.component";
 import {StockProductsComponent} from "./components/stock-products/stock-products.component";
 import {StockSelectorComponent} from "./components/stock-selector/stock-selector.component";
+import {HttpClientModule} from "@angular/common/http";
+import {StockInventoryService} from "./services/stock-inventory.service";
 
 const routes: Routes = [
   {
@@ -23,10 +25,14 @@ const routes: Routes = [
     StockSelectorComponent
   ],
   imports: [
+    HttpClientModule,
     CommonModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
+  providers: [
+    StockInventoryService
+  ]
 })
 export class StockInventoryModule {
 
