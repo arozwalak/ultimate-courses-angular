@@ -3,15 +3,11 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-fundamentals-seed-master": {
+    "angular-unit-testing": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "standalone": true,
-          "inlineTemplate": true,
-          "inlineStyle": true,
-          "style": "scss",
-          "skipTests": true
+          "style": "scss"
         }
       },
       "root": "",
@@ -21,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/angular-fundamentals-seed-master",
+            "outputPath": "dist/angular-unit-testing",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -63,16 +59,13 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "options": {
-            "proxyConfig": "proxy.conf.json"
-          },
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular-fundamentals-seed-master:build:production"
+              "buildTarget": "angular-unit-testing:build:production"
             },
             "development": {
-              "buildTarget": "angular-fundamentals-seed-master:build:development"
+              "buildTarget": "angular-unit-testing:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +73,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "angular-fundamentals-seed-master:build"
+            "buildTarget": "angular-unit-testing:build"
           }
         },
         "test": {
@@ -99,8 +92,7 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [],
-            "karmaConfig": "karma.conf.js"
+            "scripts": []
           }
         }
       }
