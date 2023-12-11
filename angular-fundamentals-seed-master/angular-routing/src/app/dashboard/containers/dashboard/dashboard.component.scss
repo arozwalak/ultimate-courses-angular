@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+  width: 100%;
+}
+
+h2 {
+  font-size: 22px;
+  font-weight: 400;
+  margin: 6px 30px 20px;
+  text-transform: capitalize;
+}
+
+.dashboard {
+  flex: 0 0 40%;
+  padding: 20px 0;
+  overflow: hidden;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
