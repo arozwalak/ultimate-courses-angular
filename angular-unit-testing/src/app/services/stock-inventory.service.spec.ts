@@ -1,10 +1,11 @@
 import { of } from 'rxjs';
 import { StockInventoryService } from './stock-inventory.service';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { Item, Product } from '../models/product.interface';
 
 function createResponse(body: any) {
-  return of(new HttpResponse({ body: JSON.stringify(body) }));
+  return of(body);
 }
 
 class MockHttp {
@@ -13,12 +14,12 @@ class MockHttp {
   }
 }
 
-const cartItems = [
+const cartItems: Item[] = [
   { product_id: 1, quantity: 10 },
   { product_id: 2, quantity: 5 },
 ];
 
-const productItems = [
+const productItems: Product[] = [
   { id: 1, price: 10, name: 'Test' },
   { id: 2, price: 100, name: 'Another test' },
 ];
@@ -39,5 +40,21 @@ describe('StockInventoryService', () => {
     service = bed.inject(StockInventoryService);
   });
 
-  it('should get cart items', () => {});
+  it('should get cart items', () => {
+    spyOn(httpClient, 'get').and.returnValue(createResponse([...cartItems]));
+
+    service.getCartItems().subscribe((result) => {
+      expect(result.length).toBe(2);
+      expect(result).toEqual(cartItems);
+    });
+  });
+
+  it('should get product items', () => {
+    spyOn(httpClient, 'get').and.returnValue(createResponse([...productItems]));
+
+    service.getProducts().subscribe((result) => {
+      expect(result.length).toBe(2);
+      expect(result).toEqual(productItems);
+    });
+  });
 });
