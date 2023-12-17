@@ -7,6 +7,8 @@ import { DrinkViewerComponent } from './containers/drink-viewer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { API_TOKEN } from './token';
 import { FoodService } from './food.service';
+import { FoodStoreService, Store } from './food-store/food-store.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -33,10 +35,14 @@ import { FoodService } from './food.service';
   ],
   template: `
     <div>
+      <div>Food Store ({{ (store | async)?.name }})</div>
       <pizza-viewer></pizza-viewer>
       <side-viewer></side-viewer>
       <drink-viewer></drink-viewer>
     </div>
   `,
 })
-export class AppComponent {}
+export class AppComponent {
+  store: Observable<Store> = this.foodService.getStore();
+  constructor(private foodService: FoodStoreService) {}
+}
