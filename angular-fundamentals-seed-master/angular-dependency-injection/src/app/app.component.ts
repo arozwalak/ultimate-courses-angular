@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { PizzaViewerComponent } from './containers/pizza-viewer.component';
@@ -35,14 +35,33 @@ import { Observable } from 'rxjs';
   ],
   template: `
     <div>
-      <div>Food Store ({{ (store | async)?.name }})</div>
-      <pizza-viewer></pizza-viewer>
+      <!-- <div>Food Store ({{ (store | async)?.name }})</div> -->
+
+      <div>Counter: {{ counter }}</div>
+
+      <!-- <pizza-viewer></pizza-viewer>
       <side-viewer></side-viewer>
-      <drink-viewer></drink-viewer>
+      <drink-viewer></drink-viewer> -->
     </div>
   `,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   store: Observable<Store> = this.foodService.getStore();
-  constructor(private foodService: FoodStoreService) {}
+  counter = 0;
+  constructor(private foodService: FoodStoreService, private zone: NgZone) {}
+
+  ngOnInit() {
+    this.zone.runOutsideAngular(() => {
+      for (let i = 0; i < 100; i++) {
+        setTimeout(() => this.counter++);
+      }
+      this.zone.run(() => {
+        setTimeout(() => (this.counter = this.counter), 1000);
+      });
+    });
+  }
+
+  ngDoCheck() {
+    console.log('Change detection has been run!');
+  }
 }
