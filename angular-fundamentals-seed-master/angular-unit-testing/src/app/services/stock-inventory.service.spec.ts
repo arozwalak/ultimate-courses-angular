@@ -43,7 +43,7 @@ describe('StockInventoryService', () => {
   it('should get cart items', () => {
     spyOn(httpClient, 'get').and.returnValue(createResponse([...cartItems]));
 
-    service.getCartItems().subscribe((result) => {
+    service.getCartItems().subscribe((result: Item[]) => {
       expect(result.length).toBe(2);
       expect(result).toEqual(cartItems);
     });
@@ -52,7 +52,7 @@ describe('StockInventoryService', () => {
   it('should get product items', () => {
     spyOn(httpClient, 'get').and.returnValue(createResponse([...productItems]));
 
-    service.getProducts().subscribe((result) => {
+    service.getProducts().subscribe((result: Product[]) => {
       expect(result.length).toBe(2);
       expect(result).toEqual(productItems);
     });

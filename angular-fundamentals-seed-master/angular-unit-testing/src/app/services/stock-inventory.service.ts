@@ -10,13 +10,13 @@ export class StockInventoryService {
   getCartItems(): Observable<Item[]> {
     return this.http
       .get<Item[]>('/api/cart')
-      .pipe(catchError((err) => throwError(() => new Error(err))));
+      .pipe(catchError((err: any) => throwError(() => new Error(err))));
   }
 
   getProducts(): Observable<Product[]> {
     return this.http
       .get<Product[]>('/api/products')
-      .pipe(catchError((err) => throwError(() => new Error(err))));
+      .pipe(catchError((err: any) => throwError(() => new Error(err))));
   }
 
   checkBranchId(id: string): Observable<boolean> {
