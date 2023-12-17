@@ -15,17 +15,14 @@ export function PizzaFactory(http: HttpClient) {
   return new FoodService(http, '/api/pizzas');
 }
 
+export abstract class PizzaService {
+  getPizzas!: () => Observable<Pizza[]>;
+}
 @Component({
   standalone: true,
   selector: 'pizza-viewer',
   imports: [CommonModule],
-  providers: [
-    {
-      provide: FoodService,
-      useFactory: PizzaFactory,
-      deps: [HttpClient],
-    },
-  ],
+  providers: [{ provide: PizzaService, useExisting: FoodService }],
   template: `
     <div>
       <div *ngFor="let item of items$ | async">
@@ -36,8 +33,8 @@ export function PizzaFactory(http: HttpClient) {
 })
 export class PizzaViewerComponent implements OnInit {
   items$!: Observable<Pizza[]>;
-  constructor(private foodService: FoodService) {}
+  constructor(private foodService: PizzaService) {}
   ngOnInit() {
-    this.items$ = this.foodService.getFood();
+    this.items$ = this.foodService.getPizzas();
   }
 }

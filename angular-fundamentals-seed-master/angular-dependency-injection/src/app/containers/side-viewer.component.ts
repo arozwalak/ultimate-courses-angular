@@ -15,17 +15,14 @@ export function SideFactory(http: HttpClient) {
   return new FoodService(http, '/api/sides');
 }
 
+export abstract class SidesService {
+  getSides!: () => Observable<Side[]>;
+}
 @Component({
   standalone: true,
   selector: 'side-viewer',
   imports: [CommonModule],
-  providers: [
-    {
-      provide: FoodService,
-      useFactory: SideFactory,
-      deps: [HttpClient],
-    },
-  ],
+  providers: [{ provide: SidesService, useExisting: FoodService }],
   template: `
     <div>
       <div *ngFor="let item of items$ | async">
@@ -36,8 +33,8 @@ export function SideFactory(http: HttpClient) {
 })
 export class SideViewerComponent implements OnInit {
   items$!: Observable<Side[]>;
-  constructor(private foodService: FoodService) {}
+  constructor(private foodService: SidesService) {}
   ngOnInit() {
-    this.items$ = this.foodService.getFood();
+    this.items$ = this.foodService.getSides();
   }
 }

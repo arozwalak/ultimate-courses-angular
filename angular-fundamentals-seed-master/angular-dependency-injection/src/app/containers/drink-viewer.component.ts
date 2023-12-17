@@ -15,17 +15,15 @@ export function DrinkFactory(http: HttpClient) {
   return new FoodService(http, '/api/drinks');
 }
 
+export abstract class DrinkService {
+  getDrinks!: () => Observable<Drink[]>;
+}
+
 @Component({
   standalone: true,
   selector: 'drink-viewer',
   imports: [CommonModule],
-  providers: [
-    {
-      provide: FoodService,
-      useFactory: DrinkFactory,
-      deps: [HttpClient],
-    },
-  ],
+  providers: [{ provide: DrinkService, useExisting: FoodService }],
   template: `
     <div>
       <div *ngFor="let item of items$ | async">
@@ -36,8 +34,8 @@ export function DrinkFactory(http: HttpClient) {
 })
 export class DrinkViewerComponent implements OnInit {
   items$!: Observable<Drink[]>;
-  constructor(private foodService: FoodService) {}
+  constructor(private foodService: DrinkService) {}
   ngOnInit() {
-    this.items$ = this.foodService.getFood();
+    this.items$ = this.foodService.getDrinks();
   }
 }

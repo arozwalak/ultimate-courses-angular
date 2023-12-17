@@ -6,6 +6,7 @@ import { SideViewerComponent } from './containers/side-viewer.component';
 import { DrinkViewerComponent } from './containers/drink-viewer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { API_TOKEN } from './token';
+import { FoodService } from './food.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ import { API_TOKEN } from './token';
     SideViewerComponent,
     DrinkViewerComponent,
   ],
-  providers: [{ provide: API_TOKEN, useValue: '/api/pizzas' }],
+  providers: [FoodService, { provide: API_TOKEN, useValue: '/api/drinks' }],
   styles: [
     `
       pizza-viewer,

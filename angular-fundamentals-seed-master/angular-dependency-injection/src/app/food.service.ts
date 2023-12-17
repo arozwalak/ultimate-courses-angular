@@ -11,7 +11,15 @@ export class FoodService {
   ) {
     console.log(this.api);
   }
-  getFood(): Observable<any[]> {
-    return this.http.get<any[]>(this.api);
+  getSides(): Observable<any[]> {
+    return this.http.get<any[]>('/api/sides');
+  }
+
+  getPizzas(): Observable<any[]> {
+    return this.http.get<any[]>('/api/pizzas');
+  }
+
+  getDrinks(): Observable<any[]> {
+    return this.http.get<any[]>('/api/drinks');
   }
 }
