@@ -4,7 +4,7 @@
       "id": 1,
       "artist": "Oasis",
       "track": "Half The World Away",
-      "listened": false,
+      "listened": true,
       "favourite": true
     },
     {
@@ -18,21 +18,21 @@
       "id": 3,
       "artist": "Blink-182",
       "track": "All The Small Things",
-      "listened": false,
-      "favourite": true
+      "listened": true,
+      "favourite": false
     },
     {
       "id": 4,
       "artist": "Third Eye Blind",
       "track": "Get Me Out Of Here",
-      "listened": true,
-      "favourite": false
+      "listened": false,
+      "favourite": true
     },
     {
       "id": 5,
       "artist": "The Chainsmokers",
       "track": "Closer",
-      "listened": false,
+      "listened": true,
       "favourite": false
     },
     {
@@ -53,7 +53,7 @@
       "id": 8,
       "artist": "Stereophonics",
       "track": "Local Boy In The Photograph",
-      "listened": false,
+      "listened": true,
       "favourite": false
     }
   ]

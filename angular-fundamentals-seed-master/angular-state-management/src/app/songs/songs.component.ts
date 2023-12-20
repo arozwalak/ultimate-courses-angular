@@ -15,6 +15,7 @@ import { SongsService } from './services/songs.service';
     SongsFavouritesComponent,
     SongsListenedComponent,
     SongsPlaylistComponent,
+    SongsListenedComponent,
   ],
   providers: [SongsService],
   templateUrl: './songs.component.html',

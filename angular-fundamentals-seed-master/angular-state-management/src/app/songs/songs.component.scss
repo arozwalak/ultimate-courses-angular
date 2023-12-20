@@ -1,7 +1,9 @@
 :host > div {
     display: flex;
+    justify-content: center;
 }
 
 .app-songs {
     flex: 1;
+    margin: 0 12px;
 }
