@@ -35,13 +35,13 @@ import { Observable } from 'rxjs';
   ],
   template: `
     <div>
-      <!-- <div>Food Store ({{ (store | async)?.name }})</div> -->
+      <div>Food Store ({{ (store | async)?.name }})</div>
 
       <div>Counter: {{ counter }}</div>
 
-      <!-- <pizza-viewer></pizza-viewer>
+      <pizza-viewer></pizza-viewer>
       <side-viewer></side-viewer>
-      <drink-viewer></drink-viewer> -->
+      <drink-viewer></drink-viewer>
     </div>
   `,
 })
