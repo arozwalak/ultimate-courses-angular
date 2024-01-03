@@ -28,10 +28,18 @@ export class AuthService {
     })
   );
 
+  private currentUser!: any;
+
   constructor(private store: Store, private af: AngularFireAuth) {}
 
   get authState() {
     return this.af.authState;
+  }
+
+  async user() {
+    console.log(this.af.authState);
+    const user = await this.af.currentUser;
+    return user;
   }
 
   createUser(email: string, password: string) {
