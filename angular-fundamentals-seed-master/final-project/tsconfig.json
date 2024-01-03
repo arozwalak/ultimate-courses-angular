@@ -2,6 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -24,7 +25,7 @@
       "dom"
     ],
     "paths": {
-      "store": ["./src/store.ts"]
+      "store": ["src/store.ts"]
     }
   },
   "angularCompilerOptions": {
