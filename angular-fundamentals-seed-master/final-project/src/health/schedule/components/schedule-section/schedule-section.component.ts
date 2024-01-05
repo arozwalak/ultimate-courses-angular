@@ -1,5 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from "@angular/core";
 import {ScheduleItem} from "../../../shared/services/schedule/schedule.service";
+import {Meal} from "../../../shared/services/meals/meals.service";
 
 
 @Component({
@@ -25,7 +26,7 @@ import {ScheduleItem} from "../../../shared/services/schedule/schedule.service";
             </div>
           </ng-template>
 
-          <div class="schedule-section__item food"
+          <div class="schedule-section__item workout"
                *ngIf="section?.workouts; else addWorkout"
                (click)="onSelect('workouts', section?.workouts)">
             <span>{{ section?.workouts | join }}</span>
@@ -50,7 +51,7 @@ export class ScheduleSectionComponent {
   @Output()
   select = new EventEmitter<any>();
 
-  onSelect(type: string, assigned: any[] = []) {
+  onSelect(type: string, assigned: Meal[] | null = []) {
     const data = this.section;
     this.select.emit({
       type,

@@ -25,7 +25,9 @@ import {Workout, WorkoutsService} from "../../../shared/services/workouts/workou
 
       <app-schedule-assign *ngIf="open"
         [section]="selected$ | async"
-        [list]="list$ | async">
+        [list]="list$ | async"
+        (update)="assignItem($event)"
+        (cancel)="closeAssign()">
       </app-schedule-assign>
     </div>
   `,
@@ -58,6 +60,7 @@ export class ScheduleComponent implements OnInit, OnDestroy {
           this.scheduleService.schedule$.subscribe(),
           this.scheduleService.selected$.subscribe(),
           this.scheduleService.list$.subscribe(),
+          this.scheduleService.items$.subscribe(),
           this.mealService.meals$.subscribe(),
           this.workoutService.workouts$.subscribe(),
         ];
@@ -76,5 +79,14 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   changeSection(event: any) {
     this.open = true;
     this.scheduleService.selectSection(event);
+  }
+
+  closeAssign() {
+    this.open = false;
+  }
+
+  assignItem(items: string[]) {
+    this.scheduleService.updateItems(items);
+    this.closeAssign();
   }
 }
