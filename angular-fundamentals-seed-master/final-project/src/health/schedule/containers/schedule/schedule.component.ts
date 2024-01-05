@@ -6,6 +6,7 @@ import {
   ScheduleService,
 } from 'src/health/shared/services/schedule/schedule.service';
 import { Store } from 'store';
+import {AuthService} from "../../../../auth/shared/services/auth/auth.service";
 
 @Component({
   selector: 'app-schedule',
@@ -25,12 +26,18 @@ export class ScheduleComponent implements OnInit, OnDestroy {
   date$!: Observable<Date | null>;
   schedule$!: Observable<ScheduleItem[]>;
   subscriptions: Subscription[] = [];
-  constructor(private store: Store, private scheduleService: ScheduleService) {}
+  constructor(
+    private store: Store,
+    private authService: AuthService,
+    private scheduleService: ScheduleService) {}
 
   ngOnInit(): void {
     this.date$ = this.store.select('date');
     this.schedule$ = this.store.select('schedule');
-    this.subscriptions = [this.scheduleService.schedule$.subscribe()];
+    this.authService.auth$.subscribe((next) =>
+      this.scheduleService.setSchedule(next).then(() => {
+        this.subscriptions = [this.scheduleService.schedule$.subscribe()];
+      }))
   }
 
   ngOnDestroy(): void {

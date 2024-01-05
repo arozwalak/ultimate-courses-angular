@@ -21,7 +21,7 @@ import { WorkoutPipe } from './pipes/workout.pipe';
   imports: [CommonModule, RouterModule, AngularFireDatabaseModule],
   declarations: [ListItemComponent, JoinPipe, WorkoutPipe],
   providers: [],
-  exports: [ListItemComponent],
+  exports: [ListItemComponent, JoinPipe],
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders<SharedModule> {
