@@ -6,6 +6,7 @@ import {
   WorkoutsService,
 } from 'src/health/shared/services/workouts/workouts.service';
 import { Store } from 'store';
+import {AuthService} from "../../../../auth/shared/services/auth/auth.service";
 
 @Component({
   selector: 'app-workouts',
@@ -46,11 +47,17 @@ export class WorkoutsComponent implements OnInit, OnDestroy {
   workouts$!: Observable<Workout[]>;
   subscription!: Subscription;
 
-  constructor(private store: Store, private workoutsService: WorkoutsService) {}
+  constructor(
+    private store: Store,
+    private authService: AuthService,
+    private workoutsService: WorkoutsService) {}
 
   ngOnInit() {
     this.workouts$ = this.store.select<Workout[]>('workouts');
-    this.subscription = this.workoutsService.workouts$.subscribe();
+    this.authService.auth$.subscribe((next) =>
+    this.workoutsService.setWorkouts(next).then(() => {
+      this.subscription = this.workoutsService.workouts$.subscribe();
+    }));
   }
 
   ngOnDestroy() {

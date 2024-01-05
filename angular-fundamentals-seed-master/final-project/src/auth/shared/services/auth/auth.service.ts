@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { tap } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {AngularFireAuth} from '@angular/fire/compat/auth';
+import {tap} from 'rxjs/operators';
 
-import { Store } from 'store';
+import {Store} from 'store';
 
 export interface User {
   email: string | null;
@@ -35,8 +35,7 @@ export class AuthService {
   }
 
   async user() {
-    const user = await this.af.currentUser;
-    return user;
+    return await this.af.currentUser;
   }
 
   createUser(email: string, password: string) {
