@@ -4,17 +4,19 @@ import { Observable, filter, map, of, tap } from 'rxjs';
 import { AuthService } from 'src/auth/shared/services/auth/auth.service';
 import { Store } from 'store';
 
-export interface Meal {
+export interface Workout {
   name?: string | undefined;
-  ingredients?: string[] | undefined;
+  type?: 'endurance' | 'strength' | undefined;
+  strength?: any;
+  endurance?: any;
   timestamp?: number | undefined;
   key?: string | null | undefined;
   $exists?: (() => boolean) | undefined;
 }
 
 @Injectable()
-export class MealsService {
-  meals$!: Observable<Meal[]>;
+export class WorkoutsService {
+  workouts$!: Observable<Workout[]>;
   uid!: string | undefined;
 
   constructor(
@@ -28,39 +30,41 @@ export class MealsService {
   async init() {
     this.uid = (await this.authService.user())?.uid;
 
-    this.meals$ = this.db
-      .list<Meal>(`meals/${this.uid}`)
+    this.workouts$ = this.db
+      .list<Workout>(`workouts/${this.uid}`)
       .snapshotChanges()
       .pipe(
         map((actions) =>
           actions.map((a) => ({ key: a.key, ...a.payload.val() }))
         ),
         tap((next) => {
-          this.store.set('meals', next);
+          this.store.set('workouts', next);
         })
       );
   }
 
-  getMeal(key: string) {
+  getWorkout(key: string) {
     if (!key) {
       return of({ name: '' });
     }
 
-    return this.store.select<Meal[]>('meals').pipe(
+    return this.store.select<Workout[]>('workouts').pipe(
       filter(Boolean),
-      map((meals: Meal[]) => meals.find((meal: Meal) => meal.key === key))
+      map((workouts: Workout[]) =>
+        workouts.find((workout: Workout) => workout.key === key)
+      )
     );
   }
 
-  addMeal(meal: Meal) {
-    return this.db.list(`meals/${this.uid}`).push(meal);
+  addWorkout(workout: Workout) {
+    return this.db.list(`workouts/${this.uid}`).push(workout);
   }
 
-  updateMeal(key: string, meal: Meal) {
-    return this.db.object(`meals/${this.uid}/${key}`).update(meal);
+  updateWorkout(key: string, workout: Workout) {
+    return this.db.object(`workouts/${this.uid}/${key}`).update(workout);
   }
 
-  removeMeal(key: string) {
-    return this.db.list(`meals/${this.uid}`).remove(key);
+  removeWorkout(key: string) {
+    return this.db.list(`workouts/${this.uid}`).remove(key);
   }
 }

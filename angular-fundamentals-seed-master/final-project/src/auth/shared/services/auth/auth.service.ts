@@ -28,8 +28,6 @@ export class AuthService {
     })
   );
 
-  private currentUser!: any;
-
   constructor(private store: Store, private af: AngularFireAuth) {}
 
   get authState() {
@@ -37,7 +35,6 @@ export class AuthService {
   }
 
   async user() {
-    console.log(this.af.authState);
     const user = await this.af.currentUser;
     return user;
   }

@@ -10,10 +10,16 @@ import { ListItemComponent } from './components/list-item/list-item.component';
 
 // services
 import { MealsService } from './services/meals/meals.service';
+import { WorkoutsService } from './services/workouts/workouts.service';
+import { ScheduleService } from './services/schedule/schedule.service';
+
+// pipes
+import { JoinPipe } from './pipes/join.pipe';
+import { WorkoutPipe } from './pipes/workout.pipe';
 
 @NgModule({
   imports: [CommonModule, RouterModule, AngularFireDatabaseModule],
-  declarations: [ListItemComponent],
+  declarations: [ListItemComponent, JoinPipe, WorkoutPipe],
   providers: [],
   exports: [ListItemComponent],
 })
@@ -21,7 +27,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders<SharedModule> {
     return {
       ngModule: SharedModule,
-      providers: [MealsService],
+      providers: [MealsService, WorkoutsService, ScheduleService],
     };
   }
 }
