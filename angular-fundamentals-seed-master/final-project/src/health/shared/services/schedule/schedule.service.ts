@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, map, tap, switchMap} from 'rxjs';
+import {BehaviorSubject, Observable, map, tap, switchMap, Subject} from 'rxjs';
 import {Store} from 'store';
 import {Meal} from '../meals/meals.service';
 import {Workout} from '../workouts/workouts.service';
@@ -25,7 +25,16 @@ export interface ScheduleList {
 @Injectable()
 export class ScheduleService {
   private date$ = new BehaviorSubject(new Date());
+  private section$ = new Subject();
   schedule$!: Observable<ScheduleItem[]>;
+
+  selected$ = this.section$.pipe(
+    tap((next: any) => this.store.set('selected', next)));
+
+  list$ = this.section$.pipe(
+    map((value: any) => this.store.value[value.type]),
+    tap((next: any) => this.store.set('list', next))
+  )
   uid!: string | undefined;
 
   constructor(
@@ -35,6 +44,10 @@ export class ScheduleService {
 
   udpateDate(date: Date) {
     this.date$.next(date);
+  }
+
+  selectSection(event: any) {
+    this.section$.next(event);
   }
 
   setSchedule(next: any) {
